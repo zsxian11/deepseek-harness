@@ -1293,6 +1293,7 @@ describe('ChatView', () => {
     expect(members).toHaveLength(3)
     expect(members.map(member => member.getAttribute('hidden')))
       .toEqual(['until-found', 'until-found', 'until-found'])
+    expect(members.every(member => member.hasAttribute('data-turn-process-hidden'))).toBe(true)
     expect(members[0]?.textContent).toContain('inspect the repository')
     expect(members[1]?.textContent).toContain('bash:a')
     expect(members[2]?.textContent).toContain('subagent:b')
@@ -1301,6 +1302,7 @@ describe('ChatView', () => {
     fireEvent.click(toggle)
     expect(toggle.getAttribute('aria-expanded')).toBe('true')
     expect(members.map(member => member.getAttribute('hidden'))).toEqual([null, null, null])
+    expect(members.every(member => member.hasAttribute('data-turn-process-hidden'))).toBe(false)
 
     fireEvent.click(toggle)
     expect(members.map(member => member.getAttribute('hidden')))

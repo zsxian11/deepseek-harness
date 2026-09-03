@@ -57,6 +57,24 @@
   min-width: 0;
 }
 
+/* Closed process Seats occupy no column height. `hidden="until-found"` alone
+   does not collapse a column flex item: `min-height: auto` keeps content size
+   when the engine parses the attribute without size containment. */
+.column > .flowItem[data-turn-process-hidden],
+.column > .flowItem[hidden="until-found"] {
+  content-visibility: hidden;
+  contain: size;
+  min-height: 0;
+  height: 0;
+  max-height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 /* A closed process reads as one summary immediately followed by its answer.
    Expanded process rows return to the ordinary 16px rhythm. */
 .flowItem[data-turn-process-answer] {

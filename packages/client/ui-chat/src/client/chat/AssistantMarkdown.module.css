@@ -44,9 +44,18 @@
 
 /* hidden="until-found" keeps a zero-height reasoning box in flex layout.
    Cancel the one gap that box would otherwise leave before the visible reply;
-   visible Assistant blocks retain the ordinary 16px rhythm. */
+   visible Assistant blocks retain the ordinary 16px rhythm. Clip the box so a
+   column flex item's `min-height: auto` cannot keep reasoning at content height. */
 .body > [data-turn-process-inline][hidden] {
+  content-visibility: hidden;
+  contain: size;
+  min-height: 0;
+  height: 0;
+  max-height: 0;
+  overflow: hidden;
   margin-bottom: -16px;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 /* Interrupted-turn terminal marker: quiet inline tag, no animation. Fixed
